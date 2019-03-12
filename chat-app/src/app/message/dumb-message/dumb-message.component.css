@@ -1,0 +1,22 @@
+:host {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.wrapper {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+    max-width: 270px;
+    background-color: #f7e1d7;
+}
+
+.you {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.them {
+    /* this property is useless. It's just here so that it's available later */
+    font-size: 1rm;
+}

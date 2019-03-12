@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+html,
+body {
+    background-image: linear-gradient(#d1ccdc, #e94f37);
+    display: block;
+    height: 100%;
+    top: 10px;
+}

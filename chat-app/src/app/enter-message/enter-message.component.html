@@ -1,0 +1,11 @@
+<form
+    [formGroup]="messageForm"
+    (ngSubmit)="sendMessage(messageForm)"
+>
+    <input
+        formControlName="message"
+        type="text" 
+        class="form-control col-xs-12"
+    >
+    <input type="submit" class="btn btn-success" style="margin-top: 5px;" value="Send">
+</form>

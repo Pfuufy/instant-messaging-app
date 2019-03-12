@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="messages">
+    <app-smart-message
+      *ngFor="let message of messages"
+      [message]="message"
+    >
+    </app-smart-message>
+  </div>
+  <app-enter-message></app-enter-message>
+</div>
