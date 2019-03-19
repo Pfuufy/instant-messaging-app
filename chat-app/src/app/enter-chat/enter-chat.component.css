@@ -1,0 +1,16 @@
+.watermelon {
+    height: 300px;
+    margin-top: 20px;
+}
+
+.enter-input {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.go-btn {
+    background-color: #71a95a;
+    border-color: #71a95a;
+    margin: auto;
+}

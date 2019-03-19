@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { MessageService } from '../message.service';
+import { Message } from '../app.models';
 
 @Component({
   selector: 'app-enter-message',
@@ -10,7 +12,9 @@ export class EnterMessageComponent implements OnInit {
 
   messageForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.initMessageForm();
@@ -18,13 +22,17 @@ export class EnterMessageComponent implements OnInit {
 
   initMessageForm() {
     this.messageForm = this.fb.group({
-      message: [null]
+      message: [null, [Validators.required]],
+      sender: [null, [Validators.required]]
     });
   }
 
   sendMessage(form: FormGroup) {
-    console.log(form.value);
-    this.messageForm.reset();
+    const message: Message = form.value;
+    this.messageService.sendMessage(message);
+    this.messageForm.patchValue({
+      message: ''
+    });
   }
 
 }

@@ -1,3 +1,20 @@
-<app-chatroom></app-chatroom>
-<!-- <app-enter-chat></app-enter-chat> -->
-<!-- <router-outlet></router-outlet> -->
+<div
+    *ngIf="loggedIn; else enterChat"
+    class="container-fluid"
+>
+    <div class="d-flex justify-content-between mb-3">
+        <div class="p-2 float-left watermelon ">
+            <img src="assets/watermelon.svg" alt="watermelon" style="height: 50px; width: 50px;">
+            Watermelon.IO
+        </div>
+        <div class="p-2 main">
+            <app-chatroom></app-chatroom>
+        </div>
+        <div class="p-2 right-side"></div>
+    </div>
+</div>
+<ng-template
+    #enterChat
+>
+    <app-enter-chat></app-enter-chat>
+</ng-template>

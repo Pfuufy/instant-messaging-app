@@ -1,7 +1,12 @@
-:host {
-    display: block;
-    max-width: 600px;
+
+.main {
+    margin-top: 20px;
+    width: 600px;
     border-radius: 30px;
-    margin: auto;
-    background-color: #b1e1de;
+    background-color: #71a95a;
+}
+
+.right-side {
+    display: block;
+    width: 200px;
 }

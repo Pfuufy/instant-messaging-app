@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Subscription } from 'rxjs';
-
 import { MessageService } from '../message.service';
-import { Message, Messages } from '../app.models';
+import { Message } from '../app.models';
+
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-chatroom',
@@ -11,37 +11,48 @@ import { Message, Messages } from '../app.models';
   styleUrls: ['./chatroom.component.css']
 })
 export class ChatroomComponent implements OnInit, OnDestroy {
-  response;
-  messages: Message[];
+  _messages: Message[] = [];
 
-  subs: Subscription;
+  _subs = new Subscription;
 
   constructor(private messageService: MessageService) { }
 
   ngOnInit() {
-    this.messages = Messages;
-    this.messageService.onConnect();
-
-    // this.messageService.response.subscribe(
-    //   success => console.log(success)
-    // );
+    this.getInitMessages();
+    this.getMessages();
   }
 
-  subscribeToMessages() {
+  getInitMessages(): void {
 
-    this.subs.add(
+    this._subs.add(
 
-      this.messageService.message.subscribe(
+      this.messageService.getInitMessages()
 
-        (message: Message) => this.messages.push(message),
-        (error: Error) => console.log('Error: ', error)
+        .subscribe(
+          (messages: Message[]) => this._messages = messages,
+          (error: Error) => console.log('Error: ', error)
+        )
 
-      )
     );
   }
 
+  getMessages(): void {
+
+    this._subs.add(
+
+      this.messageService.receiveMessage()
+
+        .subscribe(
+          (message: Message) => this._messages.push(message),
+          (error: Error) => console.log('Error: ', error)
+        )
+
+    );
+
+  }
+
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
+    this._subs.unsubscribe();
   }
 
 }

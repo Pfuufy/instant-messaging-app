@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-enter-chat',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./enter-chat.component.css']
 })
 export class EnterChatComponent implements OnInit {
+  enterScreenForm: FormGroup;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.initEnterScreenForm();
+  }
+
+  initEnterScreenForm(): void {
+    this.enterScreenForm = this.fb.group({
+      username: [null, [Validators.required]],
+      friendUserName: [null, [Validators.required]]
+    });
+  }
+
+  submitEnterScreenForm(): void {
+    console.log('submitEnterScreenForm()');
   }
 
 }

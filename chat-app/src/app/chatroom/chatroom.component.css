@@ -7,6 +7,14 @@
 }
 
 .messages {
-    max-height: 610px;
+    min-height: 500px;
+    max-height: 600px;
     overflow: auto;
+}
+
+.enter-message {
+    display: table-cell;
+    vertical-align: bottom;
+    min-width: 585px;
+    padding: 10px;
 }

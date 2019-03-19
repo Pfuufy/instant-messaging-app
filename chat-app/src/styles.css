@@ -4,7 +4,8 @@
 html,
 body {
     background-image: linear-gradient(#d1ccdc, #e94f37);
-    display: block;
+    background-attachment: fixed;
     height: 100%;
     top: 10px;
+    font-family: 'Baloo Chettan', cursive;
 }

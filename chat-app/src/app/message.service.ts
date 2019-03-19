@@ -1,35 +1,28 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, Subject } from 'rxjs';
+import { Message } from './app.models';
 
 import { Socket } from 'ngx-socket-io';
-
-import { Message, Messages } from './app.models';
+import { Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
-  // response = this.socket.fromEvent('client connected');
-
-  private _messageSource = new Subject<Message>();
-  message = this._messageSource.asObservable();
-
 
   constructor(private socket: Socket) { }
 
-  onConnect(): void {
+  getInitMessages(): Observable<Message[]> {
     this.socket.emit('client connecting');
-    this.socket.fromEvent('client connected')
-      .subscribe(
-
-        (response) => console.log(response)
-
-      );
+    return this.socket.fromEvent('sending saved messages');
   }
 
   sendMessage(message: Message): void {
-    this.socket.emit('sending message', message);
+    this.socket.emit('message sending', message);
+  }
+
+  receiveMessage(): Observable<Message> {
+    return this.socket.fromEvent('message sent');
   }
 
 }
