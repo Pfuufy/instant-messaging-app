@@ -1,38 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { MessageService } from '../message.service';
-import { Message } from '../app.models';
+import { Users } from '../app.models';
 
 @Component({
-  selector: 'app-enter-message',
-  templateUrl: './enter-message.component.html',
-  styleUrls: ['./enter-message.component.css']
+	selector: 'app-enter-message',
+	templateUrl: './enter-message.component.html',
+	styleUrls: ['./enter-message.component.css']
 })
 export class EnterMessageComponent implements OnInit {
+	@Input() users: Users;
 
-  messageForm: FormGroup;
+	_messageForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private messageService: MessageService) { }
+	constructor(private fb: FormBuilder,
+				private messageService: MessageService) { }
 
-  ngOnInit() {
-    this.initMessageForm();
-  }
+	ngOnInit() {
+		this.initMessageForm();
+	}
 
-  initMessageForm() {
-    this.messageForm = this.fb.group({
-      message: [null, [Validators.required]],
-      sender: [null, [Validators.required]]
-    });
-  }
+	initMessageForm(): void {
+		this._messageForm = this.fb.group({
+			message: [null, Validators.required],
+		});
+	}
 
-  sendMessage(form: FormGroup) {
-    const message: Message = form.value;
-    this.messageService.sendMessage(message);
-    this.messageForm.patchValue({
-      message: ''
-    });
-  }
+	sendMessage(form: FormGroup): void {
+		const message = form.value.message;
+
+		this.messageService.sendMessage({
+			message: message,
+			sender: this.users.userName
+		});
+
+		this._messageForm.patchValue({
+			message: ''
+		});
+	}
 
 }

@@ -1,18 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { Message } from '../../app.models';
+import { Message, MessageClass } from '../../app.models';
 
 @Component({
-  selector: 'app-dumb-message',
-  templateUrl: './dumb-message.component.html',
-  styleUrls: ['./dumb-message.component.css']
+	selector: 'app-dumb-message',
+	templateUrl: './dumb-message.component.html',
+	styleUrls: ['./dumb-message.component.css']
 })
-export class DumbMessageComponent implements OnInit {
-  @Input() message: Message;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
+export class DumbMessageComponent {
+	@Input() message: Message;
+	@Input() messageClass: MessageClass;
 
 }

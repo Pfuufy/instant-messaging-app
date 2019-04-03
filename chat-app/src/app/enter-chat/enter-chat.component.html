@@ -1,35 +1,27 @@
-<div class="container">
-  <div class="row">
-    <div class="col-sm"></div>
-    <div class="col">
-      <img class="watermelon" src="assets/watermelon.svg" alt="watermelon">
-      <h1 class="text-center">Welcome to Watermelon.IO!</h1>
-      <form
-        [formGroup]="enterScreenForm"
-        (ngSubmit)="submitEnterScreenForm()"
-      >
-        <div class="form-group">
-            <input
-              formControlName="username"
-              type="text"
-              placeholder="Your user name"
-              class="text-center form-control enter-input"
-            />
-            <input
-              formControlName="friendUserName"
-              type="text"
-              placeholder="Your friend's user name"
-              class="text-center form-control enter-input"
-            />
-            <input
-              [disabled]="!enterScreenForm.valid"
-              type="submit" 
-              value="GO!" 
-              class="btn go-btn form-control"
-            />
-        </div>
-      </form>
-    </div>
-    <div class="col-sm"></div>
-  </div>
-</div>
+<img class="watermelon" src="assets/watermelon.svg" alt="watermelon">
+<h2 class="mt-3 text-center">Welcome to Watermelon.IO!</h2>
+	<form
+		[formGroup]="_enterScreenForm"
+		(ngSubmit)="submitEnterScreenForm()"
+	>
+  	<input
+		formControlName="userName"
+		type="text"
+		placeholder="Your Name"
+		class="mt-2 text-center form-control enter-input"
+  	>
+  	<input
+		formControlName="friendUserName"
+		type="text"
+		placeholder="Your Friend's Name"
+		class="mt-2 text-center form-control enter-input"
+  	>
+	<input
+		[disabled]="_enterScreenForm.invalid"
+		type="submit"
+		value="GO!"
+		id="go-btn"
+		class="mt-2 text-center form-control go-btn"
+  	>
+</form>
+

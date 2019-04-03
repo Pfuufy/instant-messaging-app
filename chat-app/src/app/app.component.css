@@ -1,12 +1,5 @@
-
-.main {
-    margin-top: 20px;
-    width: 600px;
-    border-radius: 30px;
-    background-color: #71a95a;
-}
-
-.right-side {
-    display: block;
-    width: 200px;
+.main-content {
+    min-height: 510px;
+    max-height: 600px;
+    height: 85vh;
 }

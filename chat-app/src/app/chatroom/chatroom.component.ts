@@ -1,58 +1,72 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+import { StateManageService } from '../state-manage.service';
 import { MessageService } from '../message.service';
-import { Message } from '../app.models';
+import { Message, Users } from '../app.models';
 
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-chatroom',
-  templateUrl: './chatroom.component.html',
-  styleUrls: ['./chatroom.component.css']
+	selector: 'app-chatroom',
+	templateUrl: './chatroom.component.html',
+	styleUrls: ['./chatroom.component.css']
 })
 export class ChatroomComponent implements OnInit, OnDestroy {
-  _messages: Message[] = [];
+	_messages: Message[] = [];
 
-  _subs = new Subscription;
+	users: Users;
 
-  constructor(private messageService: MessageService) { }
+	private _subs = new Subscription();
 
-  ngOnInit() {
-    this.getInitMessages();
-    this.getMessages();
-  }
+	constructor(private messageService: MessageService, private stateManageService: StateManageService) { }
 
-  getInitMessages(): void {
+	ngOnInit() {
+		this.getUsers();
+		this.getInitMessages();
+		this.listenForNewMessages();
+	}
 
-    this._subs.add(
+	getUsers(): void {
+		this._subs.add(
 
-      this.messageService.getInitMessages()
+			this.stateManageService.usersObservable.subscribe(
 
-        .subscribe(
-          (messages: Message[]) => this._messages = messages,
-          (error: Error) => console.log('Error: ', error)
-        )
+				(users: Users) => this.users = users,
+				(error: Error) => console.log('Error: ', error)
 
-    );
-  }
+			)
 
-  getMessages(): void {
+		);
+	}
 
-    this._subs.add(
+	getInitMessages(): void {
+		this._subs.add(
 
-      this.messageService.receiveMessage()
+			this.messageService.getInitMessages().subscribe(
 
-        .subscribe(
-          (message: Message) => this._messages.push(message),
-          (error: Error) => console.log('Error: ', error)
-        )
+				(messages: Message[]) => this._messages = messages,
+				(error: Error) => console.log('Error: ', error)
 
-    );
+			)
 
-  }
+		);
+	}
 
-  ngOnDestroy(): void {
-    this._subs.unsubscribe();
-  }
+	listenForNewMessages(): void {
+		this._subs.add(
+
+			this.messageService.receiveMessage().subscribe(
+
+				(message: Message) => this._messages.push(message),
+				(error: Error) => console.log('Error: ', error)
+
+			)
+
+		);
+	}
+
+	ngOnDestroy(): void {
+		this._subs.unsubscribe();
+	}
 
 }

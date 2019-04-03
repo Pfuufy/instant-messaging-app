@@ -1,6 +1,6 @@
 <form
-    [formGroup]="messageForm"
-    (ngSubmit)="sendMessage(messageForm)"
+    [formGroup]="_messageForm"
+    (ngSubmit)="sendMessage(_messageForm)"
 >
     <input
         formControlName="message"
@@ -9,13 +9,7 @@
         placeholder="message"
     >
     <input
-        formControlName="sender"
-        type="text"
-        class="form-control col-xs-12"
-        placeholder="sender"
-    >
-    <input
-        [disabled]="!messageForm.valid"
+        [disabled]="_messageForm.invalid"
         type="submit" 
         class="btn btn-success seed-btn" 
         style="margin-top: 5px;" 

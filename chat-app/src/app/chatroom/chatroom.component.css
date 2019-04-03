@@ -1,20 +1,19 @@
-:host {
-    display: block;
-    height: 90%;
-    min-height: 750px;
-    margin-top: 20px;
-    padding-top: 10px;
+.sit-bottom {
+    position: absolute;
+    bottom: 15px;
+    width: 87%;
+    margin-left: 3%;
+}
+
+.chatroom {
+    background-color: #71a95a;
+    padding: 7px;
+    border-radius: 10px;
 }
 
 .messages {
-    min-height: 500px;
-    max-height: 600px;
-    overflow: auto;
-}
-
-.enter-message {
-    display: table-cell;
-    vertical-align: bottom;
-    min-width: 585px;
-    padding: 10px;
+    overflow-y: scroll;
+    min-height: 400px;
+    max-height: 470px;
+    height: 80%;
 }

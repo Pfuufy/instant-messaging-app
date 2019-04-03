@@ -1,16 +1,37 @@
+.form-control:focus {
+    box-shadow: none;
+}
+
 .watermelon {
-    height: 300px;
-    margin-top: 20px;
+    min-height: 150px;
+    height: 40vh;
+    display: block;
+    margin: 0 auto;
 }
 
 .enter-input {
     background-color: transparent;
-    border: none;
-    margin-bottom: 20px;
+    border: 3px solid #71a95a;
+    border-radius: 4px;
+}
+
+.enter-input:hover {
+    background-color: #71a95a;
+}
+
+.enter-input:focus {
+    background-color: #71a95a;
 }
 
 .go-btn {
-    background-color: #71a95a;
-    border-color: #71a95a;
+    background-color: #86C155;
+    border-color: #86C155;
     margin: auto;
+}
+
+.go-btn:disabled {
+    background-color: #86C155;
+    border-color: #86C155;
+    margin: auto;
+    opacity: .6;
 }

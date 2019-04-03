@@ -1,10 +1,16 @@
-<div class="messages">
-  <app-smart-message
-    *ngFor="let message of _messages"
-    [message]="message"
-  >
-  </app-smart-message>
-</div>
-<div class="enter-message">
-  <app-enter-message></app-enter-message>
+<div class="h-100 chatroom">
+	<div id="messages" class="messages">
+		<app-smart-message
+			*ngFor="let message of _messages"
+			[message]="message"
+			[users]="users"
+		>
+		</app-smart-message>
+	</div>
+	<div class="sit-bottom">
+		<app-enter-message
+			[users]="users"
+		>
+		</app-enter-message>
+	</div>
 </div>
