@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked } from '@angular/core';
 
 import { StateManageService } from '../state-manage.service';
 import { MessageService } from '../message.service';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 	templateUrl: './chatroom.component.html',
 	styleUrls: ['./chatroom.component.css']
 })
-export class ChatroomComponent implements OnInit, OnDestroy {
+export class ChatroomComponent implements OnInit, AfterViewChecked, OnDestroy {
 	_messages: Message[] = [];
 
 	users: Users;
@@ -24,6 +24,15 @@ export class ChatroomComponent implements OnInit, OnDestroy {
 		this.getUsers();
 		this.getInitMessages();
 		this.listenForNewMessages();
+	}
+
+	ngAfterViewChecked() {
+		this.scrollToBottom();
+	}
+
+	scrollToBottom(): void {
+		const messages = document.getElementById("messages");
+		messages.scrollTop = messages.scrollHeight;
 	}
 
 	getUsers(): void {
@@ -57,7 +66,10 @@ export class ChatroomComponent implements OnInit, OnDestroy {
 
 			this.messageService.receiveMessage().subscribe(
 
-				(message: Message) => this._messages.push(message),
+				(message: Message) => {
+					this._messages.push(message);
+					this.scrollToBottom();
+				},
 				(error: Error) => console.log('Error: ', error)
 
 			)
